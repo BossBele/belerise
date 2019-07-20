@@ -52,5 +52,3 @@ I welcome contributors; I currently can't see how to improve this project but I'
 As Indrashish Ghosh gave us a way to see things differently, I hope this project, together with all uiGradients' projects, inspire other awesome "eye-catching" projects.
 Another jQuery project,
 Thanks.
-
- 😍 
