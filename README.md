@@ -8,7 +8,12 @@ This project extends a truly awesome "uiGradients" project by Indrashish Ghosh g
 This project can be easily added to your webpages through jsDelivr - A free, fast, and reliable Open Source CDN for npm & GitHub.
 You only need a single JavaScript file: belerise.js
 ```html 
-<script src="https://cdn.jsdelivr.net/gh/BossBelle/belerise/belerise.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/BossBelle/belerise@latest/belerise.js" defer></script>
+```
+### OR
+Add a minified version of the file: belerise.min.js
+```html 
+<script src="https://cdn.jsdelivr.net/gh/BossBelle/belerise@latest/belerise.min.js" defer></script>
 ```
 Make sure you also include jQuery before you include *belerise.js*
 
