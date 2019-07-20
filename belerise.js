@@ -4,7 +4,7 @@ var beleriseJSON;
 var beleriseGradient;
 // beleriseGradientColors expected to capture colors value of specified gradient object
 var beleriseGradientColors;
-// beleriseGradientColors expected to capture gradient direction value of belerise (method) options
+// beleriseGradientDirection expected to capture gradient direction value of belerise (method-argument) direction
 var beleriseGradientDirection;
 // jquery ajax call to gradients.json via jsdelivr cdn
 $.ajax({
@@ -21,14 +21,13 @@ $.ajax({
 // used jQuery.fn.extend() method to provide new methods that can be chained to the jQuery() function
 // in our case - $(element).belerise()
 jQuery.fn.extend({
-  belerise: function (gradientName, options = {
+  belerise: function (gradientName, direction =
                 // default gradient direction is 'to right'
-                direction: "right",
-            }) {
+                "right") {
                 // scripts to run if gradients.json file is captured successfully
                 if (beleriseJSON.length > 0) {
                     // function to set the gradient's direction
-                    switch (options.direction) {
+                    switch (direction) {
                         case "right":
                         case "to right":
                             beleriseGradientDirection = "to right";
