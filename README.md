@@ -1,4 +1,4 @@
-# belerise
+# belerise [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 belerise is a jQuery tool allows users to use any gradient seen in the https://uigradients.com website in their webpages. The tool requires the user to specify the gradient name and the element to which the gradient will be applied on; hence saving the user from the hassle of copying and pasting gradient css from the website (https://uigradients.com).
 
 This project extends a truly awesome "uiGradients" project by Indrashish Ghosh gotten from https://github.com/Ghosh/uiGradients
