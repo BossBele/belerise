@@ -55,5 +55,6 @@ By default, the gradient direction is "right"/"to right".
 This project uses the *gradients.json* file from Indrashish Ghosh's uiGradients repository. The file is dynamically fetched by jsdelivr hence all updated gradients are available
 I welcome contributors; I currently can't see how to improve this project but I'm sure you can. And if you can, then you should improve this project or perhaps create another that extends uiGradients
 As Indrashish Ghosh gave us a way to see things differently, I hope this project, together with all uiGradients' projects, inspire other awesome "eye-catching" projects.
+
 Another jQuery project,
 Thanks.
