@@ -32,7 +32,7 @@ Initialize the gradient and run some code to use the generated colour like so:
 ```javascript
 <script>
     $(document).ready(function(){
-      $("element").belerise("Hello World");
+      $("element").belerise("Shifter");
     });
  </script>
 ```
