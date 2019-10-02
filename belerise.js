@@ -6,31 +6,28 @@ var beleriseGradient;
 var beleriseGradientColors;
 // beleriseGradientDirection expected to capture gradient direction value of belerise (method-argument) direction
 var beleriseGradientDirection;
-// jquery ajax call to gradients.json via jsdelivr cdn
-$.when($.ajax({
-    url: 'https://cdn.jsdelivr.net/gh/Ghosh/uiGradients/gradients.json',
-    dataType: 'json',
-    success: function( data ) {
-      beleriseJSON = data;
-      console.log("Success loading beleriseJSON");
-    },
-    error: function( data ) {
-      console.error("Error loading beleriseJSON");
-    }
-}).done(function() {
     // used jQuery.fn.extend() method to provide new methods that can be chained to the jQuery() function
     // in our case - $(element).belerise()
     jQuery.fn.extend({
-            belerise: function (gradientName, direction =
+            belerise: async function (gradientName, direction =
         // default gradient direction is 'to right'
         "right") {
-            window.gradientName = gradientName;
-            window.direction = direction;
-            getGradient(gradientName, direction);
-            setGradient(this);
+                // jquery ajax call to gradients.json via jsdelivr cdn
+                await $.ajax({
+                    url: 'https://cdn.jsdelivr.net/gh/Ghosh/uiGradients/gradients.json',
+                    dataType: 'json',
+                    success: function( data ) {
+                      beleriseJSON = data;
+                      console.log("Success loading beleriseJSON");
+                    },
+                    error: function( data ) {
+                      console.error("Error loading beleriseJSON");
+                    }
+                })
+                await getGradient(gradientName, direction);
+                setGradient(this);
         }
     });
-}));
 // function to search an array of objects
 // function takes in value to search for out of the objects' name values; and the array of objects itself
 function searchObjectsArray(nameKey, myArray){
