@@ -1,38 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>belerise | demo</title>
-    <!-- metadata -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- css -->
-    <style type="text/css">
-        html,
-        body {
-            margin: 0px;
-            height: 100%;
-            width: 100%;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
-    </style>
-    <!-- js -->
-    <!-- jquery must be contained in the webpage -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- belerise.js -->
-    <script src="belerise.js"></script>
-    <!-- example of usage -->
-    <script>
-        $(document).ready(function(){
-            // add gradient to element using jQuery selector
-            // default gradient direction is right
-            // to change gradient direction do like: $("body").belerise("Beleko", "left");
-            $("body").belerise("Beleko");
-            $("#aaa").belerise("Shifter");
-        });
-    </script>
+	<title>Belerise</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css">
+	<!-- UIkit JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
+	<!-- cropzee.js -->
+	<script src="https://cdn.jsdelivr.net/gh/BossBele/belerise@latest/belerise.js" defer></script>
+	<!-- google code-prettify -->
+	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/google/code-prettify@master/styles/sunburst.css">
+	<!-- jQuery throttle-debounce -->
+	<script src="https://cdn.jsdelivr.net/gh/cowboy/jquery-throttle-debounce/jquery.ba-throttle-debounce.js" defer></script>
+	<!-- sanitize.css -->
+	<link href="https://unpkg.com/sanitize.css" rel="stylesheet">
+	<script>
+				$(document).ready(function(){
+					$(".image-previewer").belerise("Shifter");
+				    getGradients();
+				    $.each($("input[name='enable']"), function(){
+				   		if ($(this).is(":checked")) {
+				   			$(this).closest("div.uk-position-relative").find("textarea").removeAttr("disabled");
+				   		} else {
+				    		$(this).closest("div.uk-position-relative").find("textarea").attr("disabled", "disabled");
+				    	}
+			        });
+
+				    $("input, select, textarea").on( "keyup change", $.debounce(300, function() {
+				    	destroyPlugin($(".image-previewer"));
+					    $.each($("input[name='enable']"), function(){
+					   		if ($(this).is(":checked")) {
+					   			$(this).closest("div.uk-position-relative").find("textarea").removeAttr("disabled");
+					   		} else {
+					    		$(this).closest("div.uk-position-relative").find("textarea").attr("disabled", "disabled");
+					    	}
+				        });
+			            var gradientDirection = "";
+			            $.each($("input[name='gradientDirection']:checked"), function(){
+			                gradientDirection += $(this).val();
+			            });
+			            var gradientName = "";
+			            $.each($("select[name='gradientName']"), function(){
+			                gradientName += $(this).val();
+			            });
+					    $(".image-previewer").belerise(gradientName,gradientDirection);
+					}));
+				});
+				var destroyPlugin = function($elem, eventNamespace) {
+					var isInstantiated  = !! $.data($elem.get(0));
+					if (isInstantiated) {
+						$.removeData($elem.get(0));
+						$elem.off(eventNamespace);
+						$elem.unbind('.' + eventNamespace);
+					}
+				};
+				var option = $("<option>", {
+				    class: "",
+				});
+				async function getGradients() {
+			                // jquery ajax call to gradients.json via jsdelivr cdn
+			                await $.ajax({
+			                    url: 'https://cdn.jsdelivr.net/gh/Ghosh/uiGradients/gradients.json',
+			                    dataType: 'json',
+			                    success: async function( data ) {
+			                      var beleriseJSON = await data;
+			                      console.log("Success loading gradient names.");
+			                      for (var i=0; i < beleriseJSON.length; i++) {
+			                      	var name = beleriseJSON[i].name;
+							        var option2 = option.clone();
+							        $(option2).text(name);
+							        $(option2).val(name);
+							        // option.clone();
+							        $("#gradient-options").append($(option2).clone());
+							      }
+			                    },
+			                    error: function( data ) {
+			                      console.error("Error loading gradient names.");
+			                    }
+			                })
+			            }
+			</script>
+	<style>
+		* {
+			font-family: sans-serif;
+		}
+		.image-previewer {
+			height: 300px;
+			width: 300px;
+			display: flex;
+			border-radius: 10px;
+			border: 1px solid lightgrey;
+		}
+		li {
+			font-size: 11px;
+		}
+		textarea {
+			resize: none;
+			min-height: 50px;
+		}
+		pre, code {
+			user-select: all;
+		}
+	</style>
 </head>
-<body>
-    <div id="aaa" style="height: 200px; width: 200px;"></div>
+<body class="uk-section-muted uk-padding-large">
+	<div class="uk-container uk-card uk-card-default uk-overflow-auto uk-padding uk-margin-medium-bottom">
+		<h2 class="uk-h2">Installation</h2>
+		<pre class="prettyprint">&lt;script src=&quot;https://cdn.jsdelivr.net/gh/BossBele/belerise@latest/belerise.js&quot; defer&gt;&lt;/script&gt;</pre>
+	</div>
+	<!--  -->
+	<div class="uk-container uk-card uk-card-default uk-overflow-auto uk-padding uk-margin-medium-bottom">
+		<h2 class="uk-h2">Usage</h2>
+		<pre class="prettyprint">
+		$(document).ready(function(){
+		    $("body").belerise("Shifter");
+		});</pre>
+	</div>
+	<!--  -->
+	<div class="uk-container uk-card uk-card-default uk-padding uk-margin-medium-bottom">
+		<div class="uk-grid uk-child-width-1-2@m">
+			<div>
+				<div class="image-previewer"></div>
+			</div>
+			<div>
+				<form class="uk-form-stacked">
+					<div class="uk-margin-small-bottom">
+				        <label class="uk-form-label" data-option>gradientName:</label>
+				        <div class="uk-form-controls uk-inline">
+				            <select id="gradient-options" class="uk-select uk-form-small" name="gradientName">
+				            	<option value="Shifter">Shifter</option>
+						    </select>
+				        </div>
+				    </div>
+					<div class="uk-margin-small-bottom">
+				        <label class="uk-form-label" data-option>gradientDirection:</label>
+				        <div class="uk-form-controls uk-inline">
+				            <label><input class="uk-radio" type="radio" name="gradientDirection" value="right" checked> right</label>
+				            <label><input class="uk-radio" type="radio" name="gradientDirection" value="left"> left</label>
+				        </div>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	<div class="uk-container uk-card uk-card-default uk-overflow-auto uk-padding uk-margin-medium-bottom">
+		<h2 class="uk-h2">Parameters</h2>
+		<table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-middle">
+			<thead>
+				<tr>
+					<th>Parameter</th>
+					<th class="uk-width-medium">Explanation</th>
+					<th>Value Type</th>
+					<th>Values</th>
+					<th>Default</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>gradientName</td>
+					<td>name of gradient as seen in uigradients.com</td>
+					<td>String</td>
+					<td><small>eg:</small>
+						<li><code>'Shifer'</code></li>
+						<li><code>'Kimoby Is The New Blue'</code></li>
+					</td>
+					<td><code>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</code></td>
+				</tr>
+				<tr>
+					<td>gradientDirection</td>
+					<td>direction of gradient</td>
+					<td>String</td>
+					<td>
+						<li><code>'left'</code></li>
+						<li><code>'right'</code></li>
+					</td>
+					<td><code>'right'</code></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--  -->
+	<div class="uk-container uk-card uk-card-default uk-overflow-auto uk-padding uk-margin-medium-bottom">
+		<h2 class="uk-h2">Used</h2>
+		<ul class="uk-grid uk-child-width-1-5@m">
+		    <li><a href="https://uigradientsui.com" target="_blank" rel="noopener noreferrer"><div class="uk-h4">ui-gradients</div></a></li>
+		</ul>
+	</div>
 </body>
 </html>
