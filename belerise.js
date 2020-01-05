@@ -81,3 +81,16 @@ function setGradient(object) {
         "background": "linear-gradient(" + beleriseGradientDirection + ", " + beleriseGradientColors + ")", /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     });
 }
+
+$(document).ready(function(){
+    $("[data-belerise]").each(function() {
+        var gradient = $(this).data("belerise");
+        if (gradient.indexOf(",")) {
+            var gradientArray = [];
+            gradientArray = gradient.split(",");
+            $(this).belerise(gradientArray[0].trim(), gradientArray[1].trim());
+        } else {
+            $(this).belerise(gradient);
+        }
+    })
+});
