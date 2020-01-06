@@ -85,7 +85,7 @@ function setGradient(object) {
 $(document).ready(function(){
     $("[data-belerise]").each(function() {
         var gradient = $(this).data("belerise");
-        if (gradient.indexOf(",")) {
+        if (gradient.includes(",")) {
             var gradientArray = [];
             gradientArray = gradient.split(",");
             $(this).belerise(gradientArray[0].trim(), gradientArray[1].trim());
